@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <div style="margin-top:20px">
+  <h5> <strong>{{ blogpost.title }}</strong>
+  </h5>
+  <p class="text-muted"> {{ blogpost.pub_date }}</p>
+  
+  <p>{{ blogpost.post }}</p>
+  </div>
+{% endblock %}

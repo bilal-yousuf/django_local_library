@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <div style="margin-top:20px">
+    <h2>Blog</h2>
+
+    {% for post in blogpost_list %}
+      <hr>
+      <h5> <a href="{{ post.get_absolute_url }}"><strong>{{ post.title }}</strong></a>
+      </h5>
+      <p class="text-muted"> {{ post.pub_date }} at {{ post.pub_time }}</p>
+      
+      <p>{{ post.post }}</p>
+    {% endfor %}
+  </div>
+{% endblock %}
