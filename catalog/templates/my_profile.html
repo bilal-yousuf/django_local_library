@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+
+{% block title %}<title>My Profile</title>{% endblock %}
+
+{% block content %}
+  <h1>My Profile</h1>
+  <ul>
+    <li><strong>Name:</strong> {{ first_name }} {{ last_name }}</li>
+    <li><strong>Username:</strong> {{ username }}</li>
+    <li><strong>Email address:</strong> {{ email }}</li>
+    <li><strong>Currently loaned: _____ books.</strong></li>
+  </ul>
+
+
+{% endblock %}

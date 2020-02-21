@@ -6,7 +6,7 @@ from catalog.models import Book, Author, BookInstance, Genre, BlogPost
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import permission_required, login_required
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, Http404, FileResponse
 from django.urls import reverse
@@ -48,6 +48,28 @@ def index(request):
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
+
+@login_required
+def my_profile(request):
+    """View function for each users, individual profile."""
+    # get current user data
+    user = request.user
+    username = user.username
+    first_name = user.first_name
+    last_name = user.last_name
+    email = user.email
+
+
+
+
+    context = {
+        'username': username,
+        'first_name': first_name,
+        'last_name': last_name,
+        'email': email,
+    }
+
+    return render(request, 'my_profile.html', context=context)
 
 
 @permission_required('catalog.can_mark_returned')
