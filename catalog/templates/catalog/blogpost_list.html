@@ -10,7 +10,7 @@
       </h5>
       <p class="text-muted"> {{ post.pub_date }} at {{ post.pub_time }}</p>
       
-      <p>{{ post.post }}</p>
+      <p>{{ post.post|linebreaks }}</p>
     {% endfor %}
   </div>
 {% endblock %}
