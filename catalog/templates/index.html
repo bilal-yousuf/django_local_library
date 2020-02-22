@@ -1,11 +1,26 @@
 {% extends "base_generic.html" %}
 
 
-{% block title %}<title>Local Library Home</title>{% endblock %}
+{% block title %}<title>The Library Project</title>{% endblock %}
 
 {% block content %}
-  <h1>Local Library Home</h1>
-  <p>Welcome to LocalLibrary, a website developed by <em>Mozilla Developer Network</em>!</p>
+  <h1>Library Project Homepage</h1>
+  <p>Welcome to the Library Project. </p> 
+
+  <p>Feel free to browse my (very limited) selection of books and place a borrow request if something catches your eye.</p> 
+
+  
+  
+  <p><em>What is this?:</em> A private library for my friends and family. </p>
+  <p><em>Where?:</em> Currently based in Montreal, Canada.</p>
+  <p><em>Why?:</em> An initiative to support a healthy reading habit by fostering a local community of readers. Why buy a book when you can borrow one free of charge? </p>
+  <p><em>Itna thakka hua book collection?:</em>          :( </p>
+
+
+  <p><em>Warning:</em> The site is still in its bug-filled infancy and I sincerely apologize for any inconveniences that may cause.</p>
+
+  
+  
   <h2>Dynamic content</h2>
   <p>The library has the following record counts:</p>
   <ul>
@@ -14,7 +29,7 @@
     <li><strong>Copies available:</strong> {{ num_instances_available }}</li>
     <li><strong>Authors:</strong> {{ num_authors }}</li>
     <li><strong>Number of Genres:</strong> {{ num_genres }}</li>
-    <li><strong>Number of books with the word "psychedelics" in the title:</strong> {{ num_books_psych }}</li>
+    <li><strong>Number of books with the word "psychology" in the title:</strong> {{ num_books_psych }}</li>
     <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
   </ul>
 

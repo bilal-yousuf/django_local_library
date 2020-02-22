@@ -6,6 +6,6 @@
   </h5>
   <p class="text-muted"> {{ blogpost.pub_date }}</p>
   
-  <p>{{ blogpost.post }}</p>
+  <p>{{ blogpost.post|linebreaks }}</p>
   </div>
 {% endblock %}
