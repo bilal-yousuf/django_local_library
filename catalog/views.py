@@ -58,7 +58,7 @@ def my_profile(request):
     first_name = user.first_name
     last_name = user.last_name
     email = user.email
-
+    current_loan = BookInstance.objects.filter(status__exact='o')
 
 
 
@@ -67,6 +67,8 @@ def my_profile(request):
         'first_name': first_name,
         'last_name': last_name,
         'email': email,
+        'current_loan': current_loan,
+        'num_current_loan': len(current_loan),
     }
 
     return render(request, 'my_profile.html', context=context)

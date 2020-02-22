@@ -9,8 +9,25 @@
     <li><strong>Name:</strong> {{ first_name }} {{ last_name }}</li>
     <li><strong>Username:</strong> {{ username }}</li>
     <li><strong>Email address:</strong> {{ email }}</li>
-    <li><strong>Currently loaned: _____ books.</strong></li>
+    <li><strong>Currently loaned: {{ num_current_loan }} books.</strong></li>
   </ul>
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>My current books</h4>
 
+    {% for loan in current_loan %}
+      <hr>
+      <p><strong>Title:</strong> {{ loan.book.title }}</p>
+       <p><strong>Author:</strong> {{ loan.book.author }}</p> 
+
+       <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">
+       {{ loan.get_status_display }}
+      </p>
+      {% if loan.status != 'a' %}
+        <p><strong>Due to be returned:</strong> {{ loan.due_back }}</p>
+      {% endif %}
+      <p><strong>Imprint:</strong> {{ loan.imprint }}</p>
+      <p class="text-muted"><strong>Id:</strong> {{ loan.id }}</p>
+    {% endfor %}
+  </div>
 
 {% endblock %}
