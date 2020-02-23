@@ -36,6 +36,9 @@ def index(request):
     # The 'all()' is implied by default.    
     num_authors = Author.objects.count()
     
+
+    # blogs on home page
+    blogposts = BlogPost.objects.all()
     context = {
         'num_books': num_books,
         'num_instances': num_instances,
@@ -44,6 +47,7 @@ def index(request):
         'num_genres': num_genres,
         'num_books_psych': num_books_psych,
         'num_visits': num_visits,
+        'blogposts': blogposts,
     }
 
     # Render the HTML template index.html with the data in the context variable
