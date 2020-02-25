@@ -38,6 +38,8 @@ class Book(models.Model):
     	return ', '.join(genre.name for genre in self.genre.all()[:3])
     display_genre.short_description = 'Genre'
 
+
+
     def __str__(self):
         """String for representing the Model object."""
         return self.title
@@ -62,6 +64,8 @@ class BookInstance(models.Model):
     	if self.due_back and date.today() > self.due_back:
     		return True
     	return False
+
+
     
 
     LOAN_STATUS = (
@@ -79,6 +83,8 @@ class BookInstance(models.Model):
         help_text='Book availability',
     )
 
+
+
     class Meta:
         ordering = ['due_back']
         permissions = (("can_mark_returned", "Set book as returned"),)
@@ -91,8 +97,8 @@ class Author(models.Model):
     """Model representing an author."""
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    date_of_birth = models.DateField(null=True, blank=True)
-    date_of_death = models.DateField('Died', null=True, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True, help_text='yyyy-mm-dd')
+    date_of_death = models.DateField('Died', null=True, blank=True, help_text='yyyy-mm-dd')
 
 
 

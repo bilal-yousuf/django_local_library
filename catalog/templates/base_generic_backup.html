@@ -3,30 +3,26 @@
 <head>
   {% block title %}<title>Local Library</title>{% endblock %}
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- Add additional CSS in static file -->
-  {% load static %}
   <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="{% static 'catalog/css/materialize.min.css' %}"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  
+  <!-- Add additional CSS in static file -->
+  {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-
-  {% block sidebar %}
-  <nav>
-    <div class="nav-wrapper amber accent-4">
-      <div class="col-sm-10">
-        <a href="#" class="brand-logo">Library</a>
-      </div>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-2">
+      {% block sidebar %}
+        <ul class="sidebar-nav">
           <li><a href="{% url 'index' %}">Home</a></li>
-          <li><a href="{% url 'browse' %}">Browse</a></li>
           <li><a href="{% url 'blog' %}">Blog</a></li>
           <li><a href="{% url 'books' %}">All books</a></li>
           <li><a href="{% url 'authors' %}">All authors</a></li>
@@ -42,12 +38,10 @@
           {% endif %} 
 
         </ul>
-    </div>
-  </nav>
-  {% endblock %}
-    
-      <div class="center-align">{% block content %}{% endblock %}
-       
+
+     {% endblock %}
+      </div>
+      <div class="col-sm-10 ">{% block content %}{% endblock %}
        {% block pagination %}
         {% if is_paginated %}
             <div class="pagination">
@@ -66,8 +60,8 @@
           {% endif %}
         {% endblock %} 
       </div>
-
-
+    </div>
+  </div>
 
   
 <!--JavaScript at end of body for optimized loading-->

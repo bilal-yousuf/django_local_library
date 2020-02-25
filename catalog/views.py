@@ -5,15 +5,17 @@ from django.views import generic
 from catalog.models import Book, Author, BookInstance, Genre, BlogPost
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.db.models import Count
 
 from django.contrib.auth.decorators import permission_required, login_required
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect, Http404, FileResponse
+from django.http import HttpResponseRedirect, Http404, FileResponse, HttpResponse
 from django.urls import reverse
 
 from catalog.forms import RenewBookModelForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+
 
 def index(request):
     """View function for home page of site."""
@@ -35,10 +37,15 @@ def index(request):
     
     # The 'all()' is implied by default.    
     num_authors = Author.objects.count()
+
+    books = Book.objects.all()
+    copies = Book.objects.annotate(num_available=Count('bookinstance')) # annotate the queryset
+
     
 
     # blogs on home page
     blogposts = BlogPost.objects.all()
+
     context = {
         'num_books': num_books,
         'num_instances': num_instances,
@@ -48,10 +55,30 @@ def index(request):
         'num_books_psych': num_books_psych,
         'num_visits': num_visits,
         'blogposts': blogposts,
+        'copies': copies,
     }
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
+
+def cv(request):
+        #return render(request, 'cv.html')
+    image_data = open("cv2.pdf", mode='r')
+    return HttpResponse(image_data, content_type="application/pdf")
+
+def browse(request):
+    books = Book.objects.all()
+    copies = Book.objects.annotate(num_available=Count('bookinstance')) # annotate the queryset
+    # zip allows me to call both in a for loop in HTML templates
+    books_copies = zip(books, copies)
+    
+    context = {
+        'books': books,
+        'copies': copies,
+        'books_copies': books_copies,
+    }
+
+    return render(request, 'browse.html', context=context)
 
 @login_required
 def my_profile(request):

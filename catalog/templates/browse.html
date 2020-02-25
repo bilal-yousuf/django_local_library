@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<table>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Author</th>
+			<th>Copies Available</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for book, copy in books_copies %}
+			<tr>
+				<td>{{ book.title }}</td>
+				<td>{{ book.author }}</td>
+				<td>{{ copy.num_available }}</td>
+			</tr>
+		{% endfor %}	
+	</tbody>
+</table>
+
+{% endblock %}
