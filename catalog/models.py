@@ -38,6 +38,8 @@ class Book(models.Model):
     	return ', '.join(genre.name for genre in self.genre.all()[:3])
     display_genre.short_description = 'Genre'
 
+    class Meta:
+        ordering = ['title']
 
 
     def __str__(self):
@@ -55,6 +57,7 @@ class BookInstance(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular book across whole library')
     book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True) 
     imprint = models.CharField(max_length=200)
+    borrowed_on = models.DateField(null=True, blank=True)
     due_back = models.DateField(null=True, blank=True)
     borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 

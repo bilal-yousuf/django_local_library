@@ -24,7 +24,9 @@ from django.conf.urls.static import static #Use static() to add url mapping to s
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('catalog/', include('catalog.urls')),
-    path('', RedirectView.as_view(url='catalog/', permanent=True)),
+    path('home/', include('home.urls')),
+    path('', RedirectView.as_view(url='home/', permanent=True)),
     path('accounts/', include('django.contrib.auth.urls')),
+    #static(settings.STATIC_URL, document_root=settings.STATIC_ROOT),
 
 ]

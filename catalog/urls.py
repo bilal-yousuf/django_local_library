@@ -24,4 +24,5 @@ urlpatterns = [
     path('my-profile/', views.my_profile, name='my-profile'),
     path('cv/', views.cv, name='cv'),
     path('browse/', views.browse, name='browse'),
+    path('books/<uuid:pk>/request', views.request_checkout_member, name='request-checkout-member'),
 ]

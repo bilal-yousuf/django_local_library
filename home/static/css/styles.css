@@ -4,8 +4,11 @@
     list-style: none;
 }
 
-
-
+p {
+  margin-left: auto;
+  margin-right: auto;
+  width: 40em;
+}
 
 dd {
   margin-left: auto;
@@ -27,3 +30,4 @@ table {
   font-family:'Courier New';
    font-size: small;
 }
+

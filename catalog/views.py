@@ -12,7 +12,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, Http404, FileResponse, HttpResponse
 from django.urls import reverse
 
-from catalog.forms import RenewBookModelForm
+from catalog.forms import RenewBookModelForm, RequestBookCheckoutForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
@@ -71,7 +71,7 @@ def browse(request):
     copies = Book.objects.annotate(num_available=Count('bookinstance')) # annotate the queryset
     # zip allows me to call both in a for loop in HTML templates
     books_copies = zip(books, copies)
-    
+
     context = {
         'books': books,
         'copies': copies,
@@ -103,6 +103,41 @@ def my_profile(request):
     }
 
     return render(request, 'my_profile.html', context=context)
+
+
+
+def request_checkout_member(request, pk):
+    book_instance = get_object_or_404(BookInstance, pk=pk)
+
+    # If this is a POST request then process the Form data
+    if request.method == 'POST':
+
+        # Create a form instance and populate it with data from the request (binding):
+        form = RequestBookCheckoutForm(request.POST)
+
+        # Check if the form is valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required (here we just write it to the model due_back field)
+            book_instance.borrowed_on = form.cleaned_data['borrowed_on']
+            book_instance.due_back = form.cleaned_data['due_back']
+            book_instance.save()
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('browse') )
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        proposed_pickup_date = datetime.date.today() + datetime.timedelta(days=3)
+        proposed_return_date = datetime.date.today() + datetime.timedelta(weeks=3)
+        form = RenewBookModelForm(initial={'borrowed_on': proposed_pickup_date,
+                'due_back': proposed_return_date})
+
+    context = {
+        'form': form,
+        'book_instance': book_instance,
+    }
+
+    return render(request, 'catalog/book_request.html', context)
 
 
 @permission_required('catalog.can_mark_returned')
