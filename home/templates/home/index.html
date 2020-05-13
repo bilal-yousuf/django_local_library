@@ -1,11 +1,12 @@
 {% extends "home/base.html" %}
-
+{% load static %}
 {% block title %}<title>Home</title>{% endblock %}
 
 {% block content %}
 <h1>Bilal Yousuf</h1>
 <h3>About Me</h3>
-<p>I am an electrical engineering undergraduate student at McGill University (Montreal, Canada) currently in my final year of studies.</p>
+<img src="{% static 'images/Bilal_CNTower_June2019.jpeg' %}" width="200">
+<p>Hello and welcome to my website! I am an electrical engineering undergraduate student who recently graduated (May 2020) from McGill University (Montreal, Canada). Some of my interests include: analog electronics, python, web development (duh!), and music. Stay tuned for some tasty blog posts once I finally figure out the nuances of the Django web framework and the particularly nebulous realm of serving static files in production. </p>
 <a class="purple darken-2 btn-large" href="{% url 'index1' %}">Home</a><br><br>
 <a class="waves-effect waves-light btn-large">Blog</a><br><br>	
 <a class="waves-effect waves-light btn-large" href="{% url 'index' %}">Library</a><br><br>
