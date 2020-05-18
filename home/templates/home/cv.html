@@ -1,0 +1,8 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block title %}<title>Resume</title>{% endblock %}
+
+{% block content %}
+<embed src="{% static 'images/cv2.pdf' %}" type="application/pdf" style="min-height:100vh;width:100%"> </embed>
+
+{% endblock %}
