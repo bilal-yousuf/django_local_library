@@ -1,14 +1,14 @@
 from django.db import models
 from django.urls import reverse
 from datetime import date
-from ckeditor.fields import RichTextField
+#from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Post(models.Model):
 	"""Model representing a blog post."""
 	title = models.CharField(max_length=200)
 
-	body = RichTextField(help_text="What is the body of your blog post?")
+	body = models.TextField(help_text="What is the body of your blog post?")
 
 	pub_date = models.DateField(auto_now_add=True)
 	pub_time = models.TimeField(auto_now_add=True)
