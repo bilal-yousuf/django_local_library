@@ -1,0 +1,33 @@
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+p {
+  margin-left: auto;
+  margin-right: auto;
+  width: 40em;
+}
+
+dd {
+  margin-left: auto;
+  margin-right: auto;
+  width: 40em;
+}
+
+body {
+  margin: 0px;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80em
+}
+
+.edit {
+  font-family:'Courier New';
+   font-size: small;
+}
+
