@@ -1,0 +1,9 @@
+{% include "home/base.html" %}
+
+{% block content %}
+  <div style="margin-top:20px">
+  <h3>Quebec COVID-19 Tracker</h3>
+  <p>According to <a href="https://www.cbc.ca/news/canada/montreal/covid-19-quebec-may-20-1.5576506">this CBC news website,</a> here are the Corona Virus statistics for the Canadian province of Quebec. </p>
+  <p>There are a total of {{ confirmed_cases_cbc }} COVID-19 cases and {{ deaths_cbc }} total deaths from the virus.</p>
+  </div>
+{% endblock %}

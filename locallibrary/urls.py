@@ -26,6 +26,7 @@ urlpatterns = [
     path('catalog/', include('catalog.urls')),
     path('home/', include('home.urls')),
     path('blog/', include('blog.urls')),
+    path('covid19/', include('covid19.urls')),
     path('', RedirectView.as_view(url='home/', permanent=True)),
     path('accounts/', include('django.contrib.auth.urls')),
     #static(settings.STATIC_URL, document_root=settings.STATIC_ROOT),
