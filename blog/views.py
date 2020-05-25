@@ -1,30 +1,29 @@
 from django.shortcuts import render
 from django.views import generic
-from blog.models import Post
+from blog.models import Blog, Note
 
 # Create your views here.
 class BlogPostListView(generic.ListView):
-    model = Post
+    model = Blog
     paginate_by = 10
     template_name='blogpost_list.html'
 
     
-    queryset = Post.objects.filter(status__exact='b').all()
+    
 
     
 class BlogDetailView(generic.DetailView):
-	model = Post
+	model = Blog
 	template_name='blogpost_detail.html'
 
 class NotePostListView(generic.ListView):
-    model = Post
+    model = Note
     paginate_by = 10
     template_name='notepost_list.html'
 
     
-    queryset = Post.objects.filter(status__exact='n').all()
-
+    
     
 class NoteDetailView(generic.DetailView):
-	model = Post
+	model = Note
 	template_name='notepost_detail.html'

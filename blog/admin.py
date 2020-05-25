@@ -1,10 +1,16 @@
 from django.contrib import admin
 
-from .models import Post
+from .models import Blog, Note
 
 
-@admin.register(Post)
-class Post(admin.ModelAdmin):
-	list_dislplay = ['title', 'status', 'pub_date']
+@admin.register(Blog)
+class Blog(admin.ModelAdmin):
+	list_dislplay = ['title', 'pub_date']
+	list_filter = ['pub_date']
+	
+
+@admin.register(Note)
+class Note(admin.ModelAdmin):
+	list_dislplay = ['title', 'pub_date']
 	list_filter = ['pub_date']
 	
