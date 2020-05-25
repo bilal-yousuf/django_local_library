@@ -153,4 +153,4 @@ LOGIN_REDIRECT_URL = '/'
 # Since the website does not currently support email, this logs any emails sent to the console 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-django_heroku.settings(locals())
+django_heroku.settings(locals(), databases=False)
