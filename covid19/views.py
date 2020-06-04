@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 
 from .models import Data
 
+from jchart import Chart
+from jchart.config import DataSet
+
 # Create your views here.
 
 
@@ -78,6 +81,25 @@ def scrape_gov():
     return row_int, deaths, last_update
 
 
+class LineChart(Chart):
+	chart_type = 'line'
+
+	labels = []
+	data_points = []
+
+	for day in Data.objects.order_by('date'):
+		labels.append(day.date)
+		data_points.append(int(day.confirmed_cases.replace(',', '')))
+
+	def get_labels(self, **kwargs):
+		return self.labels
+
+	def get_datasets(self, **kwargs):
+		data = self.data_points
+
+		return [DataSet(type='line',
+						label='Quebec Confirmed Cases',
+						data=self.data_points)]
 
 
 def quebec_tracker(request):
@@ -104,6 +126,7 @@ def quebec_tracker(request):
         'confirmed_cases': confirmed_cases,
         'deaths': deaths,
         'last_update': last_update,
+        'line_chart': LineChart(),
         
     }
 

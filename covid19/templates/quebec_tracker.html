@@ -8,4 +8,7 @@
   <p>According to <a href="https://www.cbc.ca/news/canada/montreal/covid-19-quebec-may-20-1.5576506">the official website of the Government du Quebec,</a> here are the current COVID-19 statistics for the Canadian province of Quebec. </p>
   <p>There are a total of {{ confirmed_cases }} COVID-19 cases and {{ deaths }} total deaths from the virus. This information was last updated on {{ last_update }}</p>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+  {{ line_chart.as_html }}
 {% endblock %}
