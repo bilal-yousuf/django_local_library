@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'home',
     'blog',
     'covid19',
+    'spotify'
 
 ]
 

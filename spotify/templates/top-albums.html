@@ -1,0 +1,17 @@
+{% include "home/base.html" %}
+
+{% block content %}
+
+<div class="row">
+{% for album in queryset %}
+	<div class="card" style="width: 22rem;">
+	  <img class="card-img-top" src="{{ album.img_url }}" alt="Card image cap">
+	  <div class="flex-column d-flex card-body">
+	    <h5 class="card-title">{{ album.title }}</h5>
+	    <p class="card-text">{{ album.artist }}</p>
+	    <a href="{{ album.external_url }}" class="mt-auto btn btn-primary">Listen now!</a>
+	  </div>
+	</div>
+{% endfor %}
+</div>
+{% endblock %}
