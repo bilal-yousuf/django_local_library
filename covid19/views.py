@@ -99,6 +99,7 @@ class LineChart(Chart):
 
 		return [DataSet(type='line',
 						label='Quebec Confirmed Cases',
+						color=(148,0,211),
 						data=self.data_points)]
 
 

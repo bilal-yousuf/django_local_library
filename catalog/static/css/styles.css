@@ -1,29 +1,52 @@
-.sidebar-nav {
-    margin-top: 20px;
-    padding: 0;
-    list-style: none;
+* {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        font-size: 100%;
+        vertical-align: baseline;
+        background: transparent;
+    }
+div {
+position: relative;
+
 }
 
+html, body, .page {
+  background-color: whitesmoke;
+  font-family: monospace;
+}
 
-
-
-dd {
-  margin-left: auto;
-  margin-right: auto;
-  width: 40em;
+h1 {
+  font-weight: 600;
+  margin-top: 0;
 }
 
 body {
-  margin: 0px;
+  margin: 10px;
+  
+
 }
 
-table {
-  margin-left: auto;
-  margin-right: auto;
-  width: 80em
+img {
+  padding-bottom: 10px
 }
 
-.edit {
-  font-family:'Courier New';
-   font-size: small;
+.notes {
+  font-family: monospace;
+}
+
+.notes h2 {
+  font-size: 8em;
+  font-weight: 900;
+
+}
+.note-title {
+  font-size: 2em;
+  color: darkslategray;
+}
+
+.card {
+  margin: 10px;
+  align-items: center;
 }

@@ -1,12 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-  <div style="margin-top:20px">
+  <div class="notes" style="margin-top:20px">
     <h2>Notes</h2>
 
     {% for post in object_list %}
       <hr>
-      <h5> <a href="{{ post.get_absolute_url }}"><strong>{{ post.title }}</strong></a>
+      <h5 class="note-title"><strong>{{ post.title }}</strong>
       </h5>
       <p class="text-muted"> {{ post.pub_date }} at {{ post.pub_time }}</p>
       

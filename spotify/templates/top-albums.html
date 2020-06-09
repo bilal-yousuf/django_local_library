@@ -1,10 +1,11 @@
 {% include "home/base.html" %}
 
 {% block content %}
-
+<h2>My Spotify Statistics</h2>
+<p>Here are the albums I'm exploring these days:</p>
 <div class="row">
 {% for album in queryset %}
-	<div class="card" style="width: 22rem;">
+	<div class="card" style="width: 20rem;">
 	  <img class="card-img-top" src="{{ album.img_url }}" alt="Card image cap">
 	  <div class="flex-column d-flex card-body">
 	    <h5 class="card-title">{{ album.title }}</h5>
@@ -14,4 +15,5 @@
 	</div>
 {% endfor %}
 </div>
+<p>Grabbing my spotify account data was possible using the spotipy library especially once the Spotify Web API started to make sense.</p>
 {% endblock %}
