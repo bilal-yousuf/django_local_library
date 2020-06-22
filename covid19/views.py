@@ -114,7 +114,7 @@ class LineChart(Chart):
 	labels = []
 	data_points = []
 
-	for day in Data.objects.order_by('-date'):
+	for day in Data.objects.order_by('date'):
 		labels.append(day.date)
 		data_points.append(int(day.confirmed_cases.replace(',', '')))
 
