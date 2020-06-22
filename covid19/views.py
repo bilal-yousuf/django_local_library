@@ -114,7 +114,7 @@ class LineChart(Chart):
 	labels = []
 	data_points = []
 
-	for day in Data.objects.order_by('date'):
+	for day in Data.objects.order_by('-date'):
 		labels.append(day.date)
 		data_points.append(int(day.confirmed_cases.replace(',', '')))
 
@@ -139,14 +139,14 @@ def quebec_tracker(request):
     confirmed_cases, deaths = scrape_gov2()
     confirmed_cases = thousands_separated(confirmed_cases)
     deaths = thousands_separated(deaths)
-    last_updated = Data.objects.order_by('-date')[0].date
+    
 
     # add to database
     #avoid duplicates
     if Data.objects.filter(confirmed_cases__exact=confirmed_cases, total_deaths__exact=deaths).count()==0:
     	Data(confirmed_cases=confirmed_cases, total_deaths=deaths).save()
 
-
+    last_updated = Data.objects.order_by('-date')[0].date
 
 
     context = {
