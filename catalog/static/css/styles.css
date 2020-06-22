@@ -17,7 +17,7 @@ html, body, .page {
   font-family: monospace;
 }
 
-h1 {
+h1, h2 {
   font-weight: 600;
   margin-top: 0;
 }
