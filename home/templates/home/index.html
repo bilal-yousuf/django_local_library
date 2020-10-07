@@ -8,9 +8,10 @@
 <img src="{% static 'images/Bilal_CNTower_June2019.jpeg' %}" width="200">
 <p>Hello and welcome to my website! I am an electrical engineering undergraduate student who recently graduated (May 2020) from McGill University (Montreal, Canada). Some of my interests include: analog electronics, python, web development (duh!), and music. Stay tuned for some tasty blog posts once I finally figure out the nuances of the Django web framework and the particularly nebulous realm of serving static files in production. In the meantime, check out my resume <a href="{% url 'resume' %}">here</a>!</p> 
 <a class="purple darken-2 btn-large" href="{% url 'index1' %}">Home</a><br><br>
-<a class="waves-effect waves-light btn-large" href="{% url 'blog-list' %}">Blog</a><br><br>	
-<a class="waves-effect waves-light btn-large" href="{% url 'index' %}">Library</a><br><br>
+
+
 <a class="waves-effect waves-light btn-large" href="{% url 'note-list' %}">Notes</a><br><br>	
 <a class="waves-effect waves-light btn-large" href="{% url 'quebec-tracker' %}">COVID-19 Tracker</a><br><br>
 <a class="waves-effect waves-light btn-large" href="{% url 'top' %}">Spotify App</a><br><br>
+<a class="waves-effect waves-light btn-large" href="{% url 'blog-list' %}">Blog</a><br><br>	
 {% endblock %}
