@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd
 
 from .models import Data
 
@@ -10,6 +11,10 @@ from jchart.config import DataSet, Tick
 # Create your views here.
 
 
+def filter_digits(string):
+	"""Returns the all digits concatonated sequentially in a string as a single integer value."""
+	return ''.join(filter(lambda i: i.isdigit(), string)) 
+
 def thousands_separated(number):
 	"""Separate an integer with thousands commas for presentation."""
 	return f"{number:,}"
@@ -18,9 +23,6 @@ def isolate_integers(string):
 	"""Isolate positive integers from a string, returns as a list of integers."""
 	return [int(s) for s in string.split() if s.isdigit()]
 
-def filter_digits(string):
-	"""Returns the all digits concatonated sequentially in a string as a single integer value."""
-	return ''.join(filter(lambda i: i.isdigit(), string)) 
 
 def parse_list(list):
 	"""Take list of integers, and return a single integer."""
@@ -94,7 +96,8 @@ def scrape_gov2():
 	soup = BeautifulSoup(page.content, 'html.parser')
 
 	headline = soup.find(id="c47903")
-	headline = str(headline.select("div div p")[0])
+	#stores as a string
+	headline = headline.select("div div p")[0].get_text()
 
 	#split the string for cases and deaths
 	cases = headline.split("COVID", 1)[0]
@@ -106,6 +109,39 @@ def scrape_gov2():
 	return case_count, death_count
 
 
+def scrape_gov3():
+	"""Third refactoring of code as a workaround for the XHR/csv issue"""
+	cases_csv_url = 'https://cdn-contenu.quebec.ca/cdn-contenu/sante/documents/Problemes_de_sante/covid-19/csv/cas-region-en.csv'
+	deaths_csv_url = 'https://cdn-contenu.quebec.ca/cdn-contenu/sante/documents/Problemes_de_sante/covid-19/csv/deces-region-en.csv'
+
+	#read the csv's as a pandas dataframe
+	cases_df = pd.read_csv(cases_csv_url)
+	deaths_df = pd.read_csv(deaths_csv_url)
+
+	#isolate the last row of each df as a string
+	cases = str(cases_df.tail(1))
+	deaths = str(deaths_df.tail(1))
+
+	#recursively isolate the last column of the last row
+	#note we must use this method instead of inherent pandas df navigational tools 
+	#because the creators of the csv did not implement it "correctly"
+
+	while ';' in cases:
+		cases = cases.split(';', 1)[1]
+	while ';' in deaths:
+		deaths = deaths.split(';', 1)[1]
+
+	#returns the value as an int using helper funcs
+	cases = parse_list(isolate_integers(cases))
+	deaths = parse_list(isolate_integers(deaths))
+
+	return cases, deaths
+
+
+
+
+from jchart import Chart
+from jchart.config import DataSet
 
 
 class LineChart(Chart):
@@ -133,10 +169,8 @@ class LineChart(Chart):
 def quebec_tracker(request):
     """View function for Quebec tracker site."""
 
-    #count_cbc  = scrape_cbc()
-    #confirmed_cases_cbc = thousands_separated(count_cbc[0])
-    #deaths_cbc = thousands_separated(count_cbc[1])
-    confirmed_cases, deaths = scrape_gov2()
+
+    confirmed_cases, deaths = scrape_gov3()
     confirmed_cases = thousands_separated(confirmed_cases)
     deaths = thousands_separated(deaths)
     
@@ -162,3 +196,6 @@ def quebec_tracker(request):
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'quebec_tracker.html', context=context)
+
+
+

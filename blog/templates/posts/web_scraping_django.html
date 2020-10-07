@@ -1,0 +1,23 @@
+{% include "home/base.html" %}
+
+{% block content %}
+<h1>We scraping with Django</h1>
+<p>This article will allow users to construct a simple web scraping application in Python and deploy it to their Django project. I will assume you already know how to set up a Django project as well as basic Django functionality – I highly recommend the Mozilla Developer Network’s comprehensive Django tutorial as well as the tutorial from the Django documentation for those interesting in creating websites and webapps with python.</p>
+
+<p>As with any project, it is helpful to establish a design flow. Ours will look as follows:</p>
+<ul>
+	<li>Setting up the Django application</li>
+	<li>Write a simple web scraping script with BeautifulSoup and requests</li>
+	<li>Creating models for our applications to store scraped data</li>
+	<li>Plotting our data</li>
+	<li>Creating a HTML template</li>
+	<li>(Optional)Scheduling</li>
+</ul>
+
+<h2>Setting up the Django application</h2>
+<p>Let’s begin by starting an application in our existing Django project. Open a command line interface of your choosing, activate your virtual environment and navigate to your project’s main directory (where the manage.py file is located). Type in the following code to start a new Django app:</p>
+<p><code>python manage.py startapp covid19</code></p>
+<p>This creates an application directory called ‘covid19’ where we will write all our code. But first, we need to let Django know that this application exists. This can be done by adding ‘covid19’ to the list of INSTALLED_APPS in the project’s settings.py file.</p>
+
+
+{% endblock %}
